@@ -1,0 +1,19 @@
+{
+  "name": "@web3u/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "chain": "npx hardhat node",
+    "compile": "npx hardhat compile",
+    "deploy:local": "npx hardhat run scripts/deploy.ts --network localhost",
+    "export:abi": "node scripts/export-abi.cjs"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@openzeppelin/contracts": "^5.0.2",
+    "hardhat": "^2.22.10",
+    "typescript": "^5.4.0",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {}
+}
