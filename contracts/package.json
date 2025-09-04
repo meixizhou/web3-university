@@ -6,14 +6,17 @@
     "chain": "npx hardhat node",
     "compile": "npx hardhat compile",
     "deploy:local": "npx hardhat run scripts/deploy.ts --network localhost",
+    "deploy:sepolia": "hardhat run scripts/deploy.ts --network sepolia",
     "export:abi": "node scripts/export-abi.cjs"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "@openzeppelin/contracts": "^5.0.2",
     "hardhat": "^2.22.10",
-    "typescript": "^5.4.0",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "dotenv": "^17.2.2"
+  }
 }

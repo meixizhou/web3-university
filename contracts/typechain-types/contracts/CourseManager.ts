@@ -46,6 +46,7 @@ export interface CourseManagerInterface extends Interface {
       | "CoursePurchased"
       | "OwnershipTransferred"
       | "RateUpdated"
+      | "YDBought"
   ): EventFragment;
 
   encodeFunctionData(
@@ -166,6 +167,28 @@ export namespace RateUpdatedEvent {
   export type OutputTuple = [weiPerYD: bigint];
   export interface OutputObject {
     weiPerYD: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace YDBoughtEvent {
+  export type InputTuple = [
+    buyer: AddressLike,
+    ethAmount: BigNumberish,
+    ydAmount: BigNumberish
+  ];
+  export type OutputTuple = [
+    buyer: string,
+    ethAmount: bigint,
+    ydAmount: bigint
+  ];
+  export interface OutputObject {
+    buyer: string;
+    ethAmount: bigint;
+    ydAmount: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -331,6 +354,13 @@ export interface CourseManager extends BaseContract {
     RateUpdatedEvent.OutputTuple,
     RateUpdatedEvent.OutputObject
   >;
+  getEvent(
+    key: "YDBought"
+  ): TypedContractEvent<
+    YDBoughtEvent.InputTuple,
+    YDBoughtEvent.OutputTuple,
+    YDBoughtEvent.OutputObject
+  >;
 
   filters: {
     "CourseCreated(string,address)": TypedContractEvent<
@@ -375,6 +405,17 @@ export interface CourseManager extends BaseContract {
       RateUpdatedEvent.InputTuple,
       RateUpdatedEvent.OutputTuple,
       RateUpdatedEvent.OutputObject
+    >;
+
+    "YDBought(address,uint256,uint256)": TypedContractEvent<
+      YDBoughtEvent.InputTuple,
+      YDBoughtEvent.OutputTuple,
+      YDBoughtEvent.OutputObject
+    >;
+    YDBought: TypedContractEvent<
+      YDBoughtEvent.InputTuple,
+      YDBoughtEvent.OutputTuple,
+      YDBoughtEvent.OutputObject
     >;
   };
 }
